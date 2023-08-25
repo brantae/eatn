@@ -19,6 +19,13 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
+gem "aws-sdk-s3", "~> 1.119"
+gem "dotenv-rails", "~> 2.8"
+
+gem "jsonapi-serializer", "~> 2.2"
+gem 'figaro'
+
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
