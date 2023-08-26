@@ -1,9 +1,14 @@
 class PostsController < ApplicationController
 
     def index 
-        user = User.find_by(params[:user_id])
-        posts = user.posts
-        render json: posts
+        if params[:user_id]
+            user = User.find(params[:user_id])
+            posts = user.posts
+            render json: posts
+        else 
+            posts = Post.all.with_attached_image
+            render json: posts
+        end
     end
 
     def show 
