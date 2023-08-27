@@ -1,22 +1,24 @@
-import { useState, useEffect } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-
-import './App.css';
+import { useState, useEffect, useContext } from "react"
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Home from "./Home"
+import Login from "./Login"
+import SignUp from "./SignUp"
+import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0);
 
-  useEffect(() => {
-    fetch("/hello")
-      .then((r) => r.json())
-      .then((data) => setCount(data.count));
-  }, []);
 
   return (
     <div className="App">
-      <h1>Page Count: {count}</h1>
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Login/>}></Route>
+          <Route exact path="/login" element = {<Login />} />
+          <Route exact path="/sign_up" element = {<SignUp />}/>
+        </Routes>
+      </Router>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
