@@ -11,3 +11,89 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.login-form {
+  display: flex;
+  justify-content: left;
+  align-items: top;
+  height: 100vh;
+  margin: 0;
+  padding: 20px
+}
+
+.login-form input[type="email"] {
+  width: 75%;
+  padding: 10px;
+  font-size: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.login-form input[type="password"] {
+  width: 75%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.login-form button {
+  display: block;
+  width: 50%;
+  padding: 5px;
+  margin-top: 10px;
+  background-color: #6fa8e6;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.signup-form {
+  display: flex;
+  justify-content: left;
+  align-items: top;
+  height: 100vh;
+  margin: 0;
+  padding: 20px
+}
+
+.signup-form input[type="text"],
+.signup-form input[type="password"],
+.signup-form input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.signup-form button {
+  display: block;
+  width: 80%;
+  padding: 5px;
+  margin-top: 10px;
+  background-color: #6fa8e6;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.input-field input {
+  width: 75%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.signup-form .ui.checkbox input[type="checkbox"] {
+  margin: -96px;
+}
+
+.login-form .ui.checkbox input[type="checkbox"] {
+  margin: -96px;
+}
