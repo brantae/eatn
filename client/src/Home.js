@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react"
-import Login from "./Login"
+import PostsPage from "./PostsPage"
+import UserProfile from "./UserProfile"
+import CreatePost from "./CreatePost"
 
 function Home() {
     
@@ -7,8 +9,11 @@ function Home() {
     
     return (
     <div className="home-page">
-        Home Page
-        
+        <h1>Home Page</h1> <br></br>
+        <h2>Login Modal (in nav) ?</h2>
+        <PostsPage />
+        <UserProfile />
+        <CreatePost />
     </div>
     
     )
