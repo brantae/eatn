@@ -6,12 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# User.delete_all
+ User.delete_all
 # Flair.delete_all
 
 puts "seeding..."
 
-user1 = User.create(name: 'Anslie', email: 'anslie@gmail.com', username: 'anslieb', password: 'cookie', bio: 'just here to post my girl dinners')
+# user1 = User.create(name: 'Anslie', email: 'anslie@gmail.com', username: 'anslieb', password: 'cookie', bio: 'just here to post my girl dinners')
 
 flair1 = Flair.create(name: 'Girl Dinner')
 flair2 = Flair.create(name: '5 Star Cuisine')
