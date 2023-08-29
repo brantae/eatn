@@ -11,7 +11,7 @@
 
 puts "seeding..."
 
-user1 = User.create(name: 'Anslie', username: 'anslieb', password: 'cookie', bio: 'just here to post my girl dinners')
+user1 = User.create(name: 'Anslie', email: 'anslie@gmail.com', username: 'anslieb', password: 'cookie', bio: 'just here to post my girl dinners')
 
 flair1 = Flair.create(name: 'Girl Dinner')
 flair2 = Flair.create(name: '5 Star Cuisine')
