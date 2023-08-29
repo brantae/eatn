@@ -35,7 +35,7 @@ function SignUp() {
                 <label>email</label>
                 <input
                 type="email"
-                placeholder="email"
+                placeholder="example@email.com"
                 value={formData.email}
                 onChange={(e) => setFormData(e.target.value)}
                 />

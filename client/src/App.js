@@ -15,11 +15,10 @@ function App() {
   return (
     <div className="App">
       <NavBar />
-      <Login  />
       
         <Routes>
           <Route exact path="/" element={<Home/>} />
-          {/* <Route exact path="/login" element = {<Login />} /> */}
+          <Route exact path="/login" element = {<Login />} />
           <Route exact path="/sign_up" element = {<SignUp />}/>
         </Routes>
       

@@ -26,20 +26,19 @@ import { Link } from 'react-router-dom'
 
         return (
             
-            <div className = 'login-form'> 
+        <div className = 'login-form'> 
             <Form onSubmit={handleSubmit}>
-                <Form.Field className="input-field">
+                <Form.Field>
                     <label>username</label>
                     <input
-                    type="username"
+                    type="text"
                     placeholder="username"
                     value={formData.username}
                     onChange={(e) => setFormData(e.target.value)}
                     />
                 </Form.Field>
-            <Form.Field className="input-field">
+            <Form.Field>
                 <label>password</label>
-                
                 <input
                     type={showPassword ? 'text' : 'password'}
                     placeholder="password"

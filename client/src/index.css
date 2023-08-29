@@ -14,23 +14,16 @@ code {
 
 .login-form {
   display: flex;
-  justify-content: left;
+  justify-content: center;
   align-items: top;
   height: 100vh;
   margin: 0;
   padding: 20px
 }
 
-.login-form input[type="email"] {
-  width: 75%;
-  padding: 10px;
-  font-size: 20px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
+.login-form input[type="email"],
 .login-form input[type="password"] {
-  width: 75%;
+  width: 100%;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ddd;
@@ -52,7 +45,7 @@ code {
 
 .signup-form {
   display: flex;
-  justify-content: left;
+  justify-content: center;
   align-items: top;
   height: 100vh;
   margin: 0;
@@ -82,13 +75,6 @@ code {
   cursor: pointer;
 }
 
-.input-field input {
-  width: 75%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
 
 .signup-form .ui.checkbox input[type="checkbox"] {
   margin: -96px;
