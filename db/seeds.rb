@@ -18,5 +18,6 @@ flair2 = Flair.create(name: '5 Star Cuisine')
 flair3 = Flair.create(name: 'Struggle Meal')
 flair4 = Flair.create(name: 'Munchies')
 flair5 = Flair.create(name: 'Home Chef')
+flair6 = Flair.create(name: 'Heart Healthy')
 
 puts "seeded!"

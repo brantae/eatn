@@ -13,16 +13,18 @@ export default function NavBar() {
         position: 'sticky',
         top: '0',
         zIndex: '100',
+        backgroundColor: '#f1e8f1',
     }
 
-    const navBarStyle = {
-        backgroundColor: '#f1e8f1',
+    const logoStyle = {
+        margin: '-4',
         }
 
         return (
             <div style={navContainerStyle}>
-            <div style={navBarStyle}>
-            <Image src={logo} alt="Logo" size="small" centered />
+                <div class='image' style={logoStyle}> 
+                    <Image src={logo} alt="Logo" size="small" centered />
+                </div>
                 <Menu pointing secondary>
                 <Menu.Item
                     name='home'
@@ -30,12 +32,12 @@ export default function NavBar() {
                     onClick={handleItemClick}
                 />
                 <Menu.Item
-                    name='Posts'
+                    name='posts'
                     active={activeItem === 'messages'}
                     onClick={handleItemClick}
                 />
                 <Menu.Item
-                    name='Profile'
+                    name='profile'
                     active={activeItem === 'friends'}
                     onClick={handleItemClick}
                 />
@@ -47,8 +49,8 @@ export default function NavBar() {
                     />
                 </Menu.Menu>
                 </Menu>
-            </div>
-        {/* Your page content goes here */}
+            
+        {/* content goes here */}
         </div>
     );
     }

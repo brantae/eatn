@@ -9,17 +9,20 @@ import NavBar from "./NavBar"
 
 function App() {
 
+  const [showLogin, setShowLogin] = useState(false)
+
 
   return (
     <div className="App">
       <NavBar />
-      <Router>
+      <Login  />
+      
         <Routes>
           <Route exact path="/" element={<Home/>} />
-          <Route exact path="/login" element = {<Login />} />
+          {/* <Route exact path="/login" element = {<Login />} /> */}
           <Route exact path="/sign_up" element = {<SignUp />}/>
         </Routes>
-      </Router>
+      
     </div>
   )
 }

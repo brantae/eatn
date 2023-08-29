@@ -25,6 +25,7 @@ import { Link } from 'react-router-dom'
         };
 
         return (
+            
             <div className = 'login-form'> 
             <Form onSubmit={handleSubmit}>
                 <Form.Field className="input-field">
@@ -57,6 +58,7 @@ import { Link } from 'react-router-dom'
             <p>haven't made an account? <Link to='/sign_up'>sign up!</Link></p>
             </Form>
             </div>
+            
         )
     }
 

@@ -42,8 +42,8 @@ code {
   width: 50%;
   padding: 5px;
   margin-top: 10px;
-  background-color: #6fa8e6;
-  color: #fff;
+  background-color: #f1e8f1 !important;
+  color: #000000 !important;
   font-size: 16px;
   border: none;
   border-radius: 6px;
@@ -74,8 +74,8 @@ code {
   width: 50%;
   padding: 5px;
   margin-top: 10px;
-  background-color: #6fa8e6;
-  color: #fff;
+  background-color: #f1e8f1 !important;
+  color: #000000 !important;
   font-size: 16px;
   border: none;
   border-radius: 6px;
@@ -98,4 +98,13 @@ code {
   margin: -96px;
 }
 
+.show {
+  display: block;
+  transition: 800ms;
+  opacity: 1;
+}
 
+.show-active {
+  transform: translateY(100px) scale(0) rotateY(180deg);
+  opacity: 0;
+}
