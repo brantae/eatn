@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { Menu, Segment, Image } from 'semantic-ui-react'
 import logo from './images/eatn-logo.png'
+import { useNavigate } from 'react-router'
 
 
 export default function NavBar() {
 
     const [activeItem, setActiveItem] = useState("home")
-
-    const handleItemClick = (e, { name }) => setActiveItem(name)
+    const navigate = useNavigate()
 
     const navContainerStyle = {
         position: 'sticky',
@@ -29,23 +29,34 @@ export default function NavBar() {
                 <Menu.Item
                     name='home'
                     active={activeItem === 'home'}
-                    onClick={handleItemClick}
+                    onClick={() => {
+                        setActiveItem('home')
+                        navigate('/')
+                    }}
                 />
                 <Menu.Item
                     name='posts'
-                    active={activeItem === 'messages'}
-                    onClick={handleItemClick}
+                    active={activeItem === 'posts'}
+                    onClick={() => {
+                        setActiveItem('posts')
+                        navigate('/posts')
+                    }}
                 />
                 <Menu.Item
                     name='profile'
-                    active={activeItem === 'friends'}
-                    onClick={handleItemClick}
+                    active={activeItem === 'profile'}
+                    onClick={() => {
+                        setActiveItem('profile')
+                        navigate('/profile')
+                    }}
                 />
                 <Menu.Menu position='right'>
                     <Menu.Item
                     name='logout'
                     active={activeItem === 'logout'}
-                    onClick={handleItemClick}
+                    onClick={() => {
+                        setActiveItem('logout')
+                    }}
                     />
                 </Menu.Menu>
                 </Menu>

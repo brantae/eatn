@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { Card, Image, Label } from 'semantic-ui-react'
 
 export default function PostsPage() {
     return (

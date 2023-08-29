@@ -5,6 +5,7 @@ import Login from "./Login"
 import SignUp from "./SignUp"
 import PostsPage from "./PostsPage"
 import NavBar from "./NavBar"
+import UserProfile from "./UserProfile"
 
 
 function App() {
@@ -20,6 +21,8 @@ function App() {
           <Route exact path="/" element={<Home/>} />
           <Route exact path="/login" element = {<Login />} />
           <Route exact path="/sign_up" element = {<SignUp />}/>
+          <Route exact path="/posts" element = {<PostsPage />}/>
+          <Route exact path="/profile" element = {<UserProfile />}/>
         </Routes>
       
     </div>
