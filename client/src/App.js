@@ -10,8 +10,6 @@ import UserProfile from "./UserProfile"
 
 function App() {
 
-  const [showLogin, setShowLogin] = useState(false)
-
 
   return (
     <div className="App">
