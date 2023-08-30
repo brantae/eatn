@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
     wrap_parameters format: []
+    
     def create 
         puts "Received username: #{params[:username]}"
         puts "Received password: #{params[:password]}"

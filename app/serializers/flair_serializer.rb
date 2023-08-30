@@ -1,3 +1,3 @@
 class FlairSerializer < ActiveModel::Serializer
-  attributes 
+  attributes :name
 end

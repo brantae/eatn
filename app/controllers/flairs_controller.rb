@@ -4,4 +4,5 @@ class FlairsController < ApplicationController
         flairs = Flair.all 
         render json: flairs
     end
+
 end
