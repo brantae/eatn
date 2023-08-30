@@ -1,28 +1,56 @@
-import { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Form, Button, Checkbox } from 'semantic-ui-react';
 import { Link } from 'react-router-dom'
+import { UserContext } from "./context/UserContext"
+import { useNavigate } from "react-router-dom"
 
     function Login() {
 
-    const [formData, setFormData] = useState({
-        email: '',
-        password: '',
-    })
+    //state
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)
+    const [errors, setErrors] = useState([])
 
-        const handleChange = (e) => {
-        const { name, value } = e.target
-        setFormData({
-            ...formData,
-            [name]: value,
+    //context
+    const { login } = useContext(UserContext)
+    const navigate = useNavigate()
+
+
+//handlers
+    // const handleChange = (e) => {
+    //     const { name, value } = e.target
+    //     setFormData({
+    //         ...formData,
+    //         [name]: value,
+    // })
+    // }
+
+    function handleSubmit(event) {
+        event.preventDefault()
+        fetch('/login', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ 
+                username: username, 
+                password: password }),
+                credentials: 'include',
         })
+        .then((resp) => {
+            console.log(resp)
+            if (resp.ok) {
+                resp.json().then((userData) => {
+                    console.log(userData)
+                    login(userData)})
+                navigate("/posts")
+            } else {
+                resp.json().then((errorData) => setErrors(errorData.errors))
+            }
+        })
+            
         }
-
-        const handleSubmit = (e) => {
-        e.preventDefault();
-        
-        console.log('Form data submitted:', formData);
-        };
 
         return (
             
@@ -33,8 +61,8 @@ import { Link } from 'react-router-dom'
                     <input
                     type="text"
                     placeholder="username"
-                    value={formData.username}
-                    onChange={(e) => setFormData(e.target.value)}
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                     />
                 </Form.Field>
             <Form.Field>
@@ -42,8 +70,8 @@ import { Link } from 'react-router-dom'
                 <input
                     type={showPassword ? 'text' : 'password'}
                     placeholder="password"
-                    value={formData.password}
-                    onChange={(e) => setFormData(e.target.value)}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     />
                     <Form.Field>
                 <Checkbox
@@ -53,6 +81,13 @@ import { Link } from 'react-router-dom'
                     />
                 </Form.Field>
             </Form.Field>
+            {errors.length > 0 && (
+                <ul style={{ color: "red" }}>
+                    {errors.map((error) => (
+                        <li key={error}>{error}</li>
+                    ))}
+                </ul>
+            )}
             <Button type="submit" primary>log in!</Button>
             <p>haven't made an account? <Link to='/sign_up'>sign up!</Link></p>
             </Form>

@@ -1,13 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Menu, Segment, Image } from 'semantic-ui-react'
 import logo from './images/eatn-logo.png'
-import { useNavigate } from 'react-router'
+import { Link, useNavigate } from "react-router-dom"
+import { UserContext } from "./context/UserContext"
 
 
 export default function NavBar() {
 
     const [activeItem, setActiveItem] = useState("home")
+    const {currentUser, logout, isLoggedIn} = useContext(UserContext)
     const navigate = useNavigate()
+
+    function logoutUser() {
+        fetch('/logout', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(() => {
+            logout()
+            navigate('/')
+        })
+    }
 
     const navContainerStyle = {
         position: 'sticky',
@@ -50,18 +65,25 @@ export default function NavBar() {
                         navigate('/profile')
                     }}
                 />
-                <Menu.Menu position='right'>
+                {isLoggedIn ? (
+                    <>
+                    <Menu.Item position="right">
+                        Hello, {currentUser.name}
+                    </Menu.Item>
                     <Menu.Item
-                    name='logout'
+                    name="logout"
                     active={activeItem === 'logout'}
-                    onClick={() => {
-                        setActiveItem('logout')
-                    }}
+                    onClick={logoutUser}
                     />
-                </Menu.Menu>
+                    </>
+                ) : (
+                    <Menu.Item position="right">
+                        <Link to="/login">Login</Link>
+                    </Menu.Item>
+                    )}
                 </Menu>
-            
-        {/* content goes here */}
-        </div>
-    );
-    }
+
+            {/* content goes here */}
+            </div>
+                )
+            }

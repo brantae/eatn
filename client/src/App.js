@@ -6,6 +6,7 @@ import SignUp from "./SignUp"
 import PostsPage from "./PostsPage"
 import NavBar from "./NavBar"
 import UserProfile from "./UserProfile"
+import { UserProvider } from './context/UserContext'
 
 
 function App() {
@@ -13,8 +14,8 @@ function App() {
 
   return (
     <div className="App">
+      <UserProvider>
       <NavBar />
-      
         <Routes>
           <Route exact path="/" element={<Home/>} />
           <Route exact path="/login" element = {<Login />} />
@@ -22,7 +23,7 @@ function App() {
           <Route exact path="/posts" element = {<PostsPage />}/>
           <Route exact path="/profile" element = {<UserProfile />}/>
         </Routes>
-      
+        </UserProvider>
     </div>
   )
 }

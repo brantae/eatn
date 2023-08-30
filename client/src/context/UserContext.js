@@ -1,24 +1,32 @@
-import { createContext, useState } from "react"
+import React, { createContext, useContext, useState, useEffect, } from 'react'
 
 const UserContext = React.createContext()
 
 function UserProvider({ children }) {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false)
-    const [currentUser, setCurrentUser] = useState()
+    const [currentUser, setCurrentUser] = useState(null)
 
     useEffect(() => {
+        // Fetch user status when the component mounts
         fetch('/me')
-        .then(resp => resp.json())
-        .then(data => {
-            if (data.error) {
-            setIsLoggedIn(false)
-            setCurrentUser({})
-            } else {
-            setIsLoggedIn(true)
-            }
-        }) 
-    }, [])
+            .then((resp) => {
+                if (resp.ok) {
+                return resp.json();
+                } else {
+                throw new Error('User not authenticated')
+                }
+            })
+            .then((data) => {
+             
+                setCurrentUser(data);
+                setIsLoggedIn(true)
+            })
+            .catch((error) => {
+                
+                setIsLoggedIn(false);
+            })
+        }, [])
 
     //Login
     function login(currentUser) {
