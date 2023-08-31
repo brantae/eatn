@@ -11,10 +11,39 @@ import { UserProvider, UserContext } from './context/UserContext'
 
 function App() {
 
+  const { isLoggedIn, login, logout, setCurrentUser, setIsLoggedIn } = useContext(UserContext)
+  
+
+  // useEffect(() => {
+  //   fetch('/me')
+  //     .then((resp) => {
+  //       if (resp.ok) {
+  //         return resp.json();
+  //       } else {
+  //         throw new Error('User not authenticated');
+  //       }
+  //     })
+  //     .then((data) => {
+  //       // Handle authenticated user data here
+  //       // You can set user data and authentication status here
+  //       setIsLoading(false); // Set isLoading to false once done
+  //     })
+  //     .catch((error) => {
+  //       // Handle unauthenticated user here
+  //       setIsLoading(false); // Set isLoading to false once done
+  //     });
+  // }, []);
+
+  // if (isLoading) {
+  //   // You can render a loading indicator here if needed
+  //   return <div>Loading...</div>;
+  // }
+
+
 
   return (
     <div className="App">
-      <UserProvider>
+      
       <NavBar />
         <Routes>
           <Route exact path="/" element={<Home/>} />
@@ -23,7 +52,7 @@ function App() {
           <Route exact path="/posts" element = {<PostsPage />}/>
           <Route exact path="/profile" element = {<UserProfile />}/>
         </Routes>
-        </UserProvider>
+        
     </div>
   )
 }

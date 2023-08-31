@@ -9,9 +9,8 @@ class UsersController < ApplicationController
     end
 
     def show 
-        user = User.find_by_id(session[:user_id])
-        if user
-            render json: user
+        if current_user
+            render json: current_user, status: :ok
         else
             render json: {error: "Not Authorized"}, status: :unauthorized
         end
@@ -24,14 +23,6 @@ class UsersController < ApplicationController
     end
 
     private 
-
-    def render_not_found_response 
-        render json: { error: "User not found" }, status: :not_found
-    end
-
-    def render_unprocessable_entity_response(exception)
-        render json: { errors: exception.record.errors.full_messages }, status: :unprocessable_entity
-    end
 
     def user_params 
         params.permit(:name, :username, :password, :email)

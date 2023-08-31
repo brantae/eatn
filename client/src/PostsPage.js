@@ -4,35 +4,36 @@ import PostCard from './PostCard'
 import { UserContext } from './context/UserContext'
 
 export default function PostsPage() {
-
     const [posts, setPosts] = useState([])
-
     const { isLoggedIn } = useContext(UserContext)
-    
-        useEffect(() => {
+
+    useEffect(() => {
         if (isLoggedIn) {
-            fetch('/posts')
+        fetch('/posts')
             .then((response) => response.json())
             .then((data) => {
-                setPosts(data)
-            })
+            setPosts(data)
+            });
+        } else {
+        setPosts([])
         }
-        }, [isLoggedIn])
+    }, [isLoggedIn])
 
-
-        return (
-            <div>
-                <h1>Posts Page</h1>
-                {posts.map((post) => (
-                    <PostCard
-                    key={post.id}
-                    image={post.image}
-                    caption={post.caption}
-                    author={post.user_name}
-                    // flair={post.flair}
-
-                    />
-                ))}
-                </div>
-            );
-}
+    return (
+        <div>
+        {isLoggedIn ? (
+            posts.map((post) => (
+            <PostCard
+                key={post.id}
+                image={post.image}
+                caption={post.caption}
+                author={post.user_name}
+                // flair={post.flair}
+            />
+            ))
+        ) : (
+            <p>Please log in to view posts.</p>
+        )}
+        </div>
+    )
+    }
