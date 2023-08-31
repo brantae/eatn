@@ -1,13 +1,38 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Card, Image, Label } from 'semantic-ui-react'
+import PostCard from './PostCard'
+import { UserContext } from './context/UserContext'
 
 export default function PostsPage() {
-    return (
-        <div>
-        <h2>Posts Display Here</h2>
-        <p>Post photo</p>
-        <p>Post poster</p>
-        <p>Post caption</p>
-        </div>
-    )
+
+    const [posts, setPosts] = useState([])
+
+    const { isLoggedIn } = useContext(UserContext)
+    
+        useEffect(() => {
+        if (isLoggedIn) {
+            fetch('/posts')
+            .then((response) => response.json())
+            .then((data) => {
+                setPosts(data)
+            })
+        }
+        }, [isLoggedIn])
+
+
+        return (
+            <div>
+                <h1>Posts Page</h1>
+                {posts.map((post) => (
+                    <PostCard
+                    key={post.id}
+                    image={post.image}
+                    caption={post.caption}
+                    author={post.user_name}
+                    // flair={post.flair}
+
+                    />
+                ))}
+                </div>
+            );
 }

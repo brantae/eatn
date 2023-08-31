@@ -8,7 +8,6 @@ function UserProvider({ children }) {
     const [currentUser, setCurrentUser] = useState(null)
 
     useEffect(() => {
-        // Fetch user status when the component mounts
         fetch('/me')
             .then((resp) => {
                 if (resp.ok) {
@@ -18,13 +17,12 @@ function UserProvider({ children }) {
                 }
             })
             .then((data) => {
-             
-                setCurrentUser(data);
+                setCurrentUser(data)
                 setIsLoggedIn(true)
             })
             .catch((error) => {
                 
-                setIsLoggedIn(false);
+                setIsLoggedIn(false)
             })
         }, [])
 

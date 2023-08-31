@@ -1,15 +1,17 @@
 import React, { useState, useContext } from 'react'
 import { Menu, Segment, Image } from 'semantic-ui-react'
 import logo from './images/eatn-logo.png'
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, useLocation } from "react-router-dom"
 import { UserContext } from "./context/UserContext"
 
 
 export default function NavBar() {
 
-    const [activeItem, setActiveItem] = useState("home")
     const {currentUser, logout, isLoggedIn} = useContext(UserContext)
     const navigate = useNavigate()
+    const location = useLocation()
+
+    const pathname = location.pathname
 
     function logoutUser() {
         fetch('/logout', {
@@ -43,27 +45,18 @@ export default function NavBar() {
                 <Menu pointing secondary>
                 <Menu.Item
                     name='home'
-                    active={activeItem === 'home'}
-                    onClick={() => {
-                        setActiveItem('home')
-                        navigate('/')
-                    }}
+                    active={pathname === '/'}
+                    onClick={() => navigate('/')}
                 />
                 <Menu.Item
                     name='posts'
-                    active={activeItem === 'posts'}
-                    onClick={() => {
-                        setActiveItem('posts')
-                        navigate('/posts')
-                    }}
+                    active={pathname === '/posts'}
+                    onClick={() => navigate('/posts')}
                 />
                 <Menu.Item
                     name='profile'
-                    active={activeItem === 'profile'}
-                    onClick={() => {
-                        setActiveItem('profile')
-                        navigate('/profile')
-                    }}
+                    active={pathname === '/profile'}
+                    onClick={() => navigate('/profile')}
                 />
                 {isLoggedIn ? (
                     <>
@@ -71,9 +64,8 @@ export default function NavBar() {
                         Hello, {currentUser.name}
                     </Menu.Item>
                     <Menu.Item
-                    name="logout"
-                    active={activeItem === 'logout'}
-                    onClick={logoutUser}
+                        name="logout"
+                        onClick={logoutUser}
                     />
                     </>
                 ) : (

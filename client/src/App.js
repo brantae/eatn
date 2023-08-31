@@ -6,7 +6,7 @@ import SignUp from "./SignUp"
 import PostsPage from "./PostsPage"
 import NavBar from "./NavBar"
 import UserProfile from "./UserProfile"
-import { UserProvider } from './context/UserContext'
+import { UserProvider, UserContext } from './context/UserContext'
 
 
 function App() {
