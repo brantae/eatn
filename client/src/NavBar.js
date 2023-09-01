@@ -5,7 +5,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { UserContext } from './context/UserContext'
 import PostModal from './PostModal'
 
-export default function NavBar() {
+export default function NavBar({posts, setPosts}) {
     const { currentUser, logout, isLoggedIn } = useContext(UserContext)
     const navigate = useNavigate()
     const location = useLocation()
@@ -49,47 +49,48 @@ export default function NavBar() {
         <div className="image" style={logoStyle}>
             <Image src={logo} alt="Logo" size="small" centered />
         </div>
-        <Menu pointing secondary>
-            <Menu.Item
-            name="home"
-            active={pathname === '/'}
-            onClick={() => navigate('/')}
-            />
-            <Menu.Item
-            name="posts"
-            active={pathname === '/posts_page'}
-            onClick={() => navigate('/posts_page')}
-            />
-            <Menu.Item
-            name="profile"
-            active={pathname === '/profile'}
-            onClick={() => navigate('/profile')}
-            />
-            {isLoggedIn ? (
-            <Menu.Item position="right">
-                <Button primary onClick={togglePostModal}>
-                Create Post
-                </Button>
-            </Menu.Item>
-            ) : (
-            <Menu.Item position="right">
-                <Link to="/login">Login</Link>
-            </Menu.Item>
-            )}
-            {isLoggedIn && (
-            <Menu.Item position="right">
-                Hello, {currentUser.name}
-            </Menu.Item>
-            )}
-            {isLoggedIn && (
-            <Menu.Item name="logout" onClick={logoutUser} />
-            )}
-        </Menu>
-        
-         
-      
+            <Menu pointing secondary>
+                <Menu.Item
+                name="home"
+                active={pathname === '/'}
+                onClick={() => navigate('/')}
+                />
+                <Menu.Item
+                name="posts"
+                active={pathname === '/posts_page'}
+                onClick={() => navigate('/posts_page')}
+                />
+                <Menu.Item
+                name="profile"
+                active={pathname === '/profile'}
+                onClick={() => navigate('/profile')}
+                />
+                {isLoggedIn ? (
+                <Menu.Item position="right">
+                    <Button basic color='grey' onClick={togglePostModal}>
+                    post an eat
+                    </Button>
+                </Menu.Item>
+                ) : (
+                <Menu.Item position="right">
+                    <Link to="/login">login</Link>
+                </Menu.Item>
+                )}
+                {isLoggedIn && (
+                <Menu.Item position="right">
+                    hello, {currentUser.name}
+                </Menu.Item>
+                )}
+                {isLoggedIn && (
+                <Menu.Item name="logout" onClick={logoutUser} />
+                )}
+            </Menu>
         </div>
-        <PostModal isOpen={isPostModalOpen} togglePostModal={togglePostModal} />
+        <PostModal 
+            isOpen={isPostModalOpen} 
+            togglePostModal={togglePostModal}
+            setPosts={setPosts} 
+        />
        
         </>
     )

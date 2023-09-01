@@ -11,45 +11,34 @@ import { UserProvider, UserContext } from './context/UserContext'
 
 function App() {
 
+  const [posts, setPosts] = useState([])
+  const [flairs, setFlairs] = useState([])
+
   const { isLoggedIn, login, logout, setCurrentUser, setIsLoggedIn } = useContext(UserContext)
-  
 
-  // useEffect(() => {
-  //   fetch('/me')
-  //     .then((resp) => {
-  //       if (resp.ok) {
-  //         return resp.json();
-  //       } else {
-  //         throw new Error('User not authenticated');
-  //       }
-  //     })
-  //     .then((data) => {
-  //       // Handle authenticated user data here
-  //       // You can set user data and authentication status here
-  //       setIsLoading(false); // Set isLoading to false once done
-  //     })
-  //     .catch((error) => {
-  //       // Handle unauthenticated user here
-  //       setIsLoading(false); // Set isLoading to false once done
-  //     });
-  // }, []);
-
-  // if (isLoading) {
-  //   // You can render a loading indicator here if needed
-  //   return <div>Loading...</div>;
-  // }
+  useEffect(() => {
+    if (isLoggedIn) {
+    fetch('/posts')
+        .then((response) => response.json())
+        .then((data) => {
+        setPosts(data)
+        });
+    } else {
+    setPosts([])
+    }
+}, [isLoggedIn])
 
 
 
   return (
     <div className="App">
       
-      <NavBar />
+      <NavBar posts={posts} setPosts={setPosts}/>
         <Routes>
           <Route exact path="/" element={<Home/>} />
           <Route exact path="/login" element = {<Login />} />
           <Route exact path="/sign_up" element = {<SignUp />}/>
-          <Route exact path="/posts_page" element = {<PostsPage />}/>
+          <Route exact path="/posts_page" element = {<PostsPage posts={posts}/>}/>
           <Route exact path="/profile" element = {<UserProfile />}/>
         </Routes>
         

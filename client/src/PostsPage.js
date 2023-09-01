@@ -3,21 +3,11 @@ import { Card, Image, Label } from 'semantic-ui-react'
 import PostCard from './PostCard'
 import { UserContext } from './context/UserContext'
 
-export default function PostsPage() {
-    const [posts, setPosts] = useState([])
+export default function PostsPage({posts}) {
+    
     const { isLoggedIn } = useContext(UserContext)
 
-    useEffect(() => {
-        if (isLoggedIn) {
-        fetch('/posts')
-            .then((response) => response.json())
-            .then((data) => {
-            setPosts(data)
-            });
-        } else {
-        setPosts([])
-        }
-    }, [isLoggedIn])
+
 
     return (
         <div>
