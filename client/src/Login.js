@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import { Form, Button, Checkbox } from 'semantic-ui-react';
 import { Link } from 'react-router-dom'
 import { UserContext } from "./context/UserContext"

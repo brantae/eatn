@@ -1,5 +1,5 @@
 import { Link, Navigate, useNavigate } from 'react-router-dom'
-import React, { useContext, useState } from "react"
+import { useContext, useState } from "react"
 import { Form, Button, Checkbox } from 'semantic-ui-react'
 import { UserContext } from "./context/UserContext"
 

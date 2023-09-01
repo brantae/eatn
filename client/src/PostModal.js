@@ -1,24 +1,19 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Modal, Button, Form } from 'semantic-ui-react'
 
-export default function PostModal() {
-    const [isOpen, setIsOpen] = useState(false)
+export default function PostModal({isOpen, togglePostModal}) {
+    
     const [caption, setCaption] = useState('')
 
-    const toggleModal = () => {
-        setIsOpen(!isOpen)
-    };
+
 
     const handleSubmit = () => {
-        toggleModal()
+        //onClose()
     }
 
     return (
         <>
-        <Button primary onClick={toggleModal}>
-            Create Post
-        </Button>
-        <Modal open={isOpen} onClose={toggleModal}>
+        <Modal open= {isOpen} >
             <Modal.Header>Create a New Post</Modal.Header>
             <Modal.Content>
             <Form>
@@ -31,7 +26,7 @@ export default function PostModal() {
             </Form>
             </Modal.Content>
             <Modal.Actions>
-            <Button primary onClick={handleSubmit}>
+            <Button primary onClick={togglePostModal}>
                 Create
             </Button>
             </Modal.Actions>

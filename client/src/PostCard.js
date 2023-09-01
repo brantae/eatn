@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Card, Image, Icon, Modal, Button } from 'semantic-ui-react';
 
 export default function PostCard({ image, caption, author, flair, canEdit, onDeleteClick, onEditClick }) {

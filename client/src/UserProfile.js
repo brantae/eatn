@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 export default function UserProfile() {
   return (
@@ -7,6 +7,7 @@ export default function UserProfile() {
         <p>Show logged in user in nav bar</p>
         <p>show account details</p>
         <p>name, user, bio</p>
+        
     </div>
   )
 }
