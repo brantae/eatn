@@ -5,7 +5,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { UserContext } from './context/UserContext'
 import PostModal from './PostModal'
 
-export default function NavBar({posts, setPosts}) {
+export default function NavBar({ setPosts }) {
     const { currentUser, logout, isLoggedIn } = useContext(UserContext)
     const navigate = useNavigate()
     const location = useLocation()

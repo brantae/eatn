@@ -1,4 +1,4 @@
-import { Card, Image, Icon, Modal, Button } from 'semantic-ui-react';
+import { Card, Image } from 'semantic-ui-react';
 
 export default function PostCard({ image, caption, author, flair }) {
 

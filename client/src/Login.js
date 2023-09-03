@@ -44,7 +44,7 @@ import { useNavigate } from "react-router-dom"
                 resp.json().then((userData) => {
                     console.log(userData)
                     login(userData)})
-                navigate("/posts")
+                navigate("/posts_page")
             } else {
                 resp.json().then((errorData) => setErrors(errorData.errors))
             }

@@ -1,8 +1,4 @@
-import { useState, useEffect } from "react"
-import PostsPage from "./PostsPage"
-import UserProfile from "./UserProfile"
-import CreatePost from "./CreatePost"
-import Login from "./Login"
+
 
 function Home() {
     

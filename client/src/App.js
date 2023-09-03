@@ -6,13 +6,12 @@ import SignUp from "./SignUp"
 import PostsPage from "./PostsPage"
 import NavBar from "./NavBar"
 import UserProfile from "./UserProfile"
-import { UserProvider, UserContext } from './context/UserContext'
+import { UserContext } from './context/UserContext'
 
 
 function App() {
 
   const [posts, setPosts] = useState([])
-  const [flairs, setFlairs] = useState([])
 
   const { isLoggedIn, login, logout, setCurrentUser, setIsLoggedIn } = useContext(UserContext)
 

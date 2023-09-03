@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext } from 'react'
-import { Card, Image, Label } from 'semantic-ui-react'
 import PostCard from './PostCard'
 import { UserContext } from './context/UserContext'
 

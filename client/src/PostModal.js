@@ -8,9 +8,9 @@ export default function PostModal({isOpen, togglePostModal, posts, setPosts}) {
 
     const handleClose = () => {
         togglePostModal()
-      }
+    }
 
-      const handleImageChange = (event) => {
+    const handleImageChange = (event) => {
         const file = event.target.files[0]
         setImageFile(file)
     }
@@ -28,8 +28,8 @@ export default function PostModal({isOpen, togglePostModal, posts, setPosts}) {
             console.log(response)
             if (!response.ok) {
                 throw new Error('Network response was not ok');
-              }
-              return response.json();
+            }
+            return response.json();
             
         })
         .then((newPost) => {
