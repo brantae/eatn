@@ -4,14 +4,6 @@ class PostsController < ApplicationController
     wrap_parameters format: []
 
     def index 
-        # if params[:user_id]
-        #     user = User.find(params[:user_id])
-        #     posts = user.posts
-        #     render json: posts
-        # else 
-        #     posts = Post.all.with_attached_image
-        #     render json: posts
-        # end
         posts = Post.all
         render json: posts
     end
