@@ -39,10 +39,8 @@ import { useNavigate } from "react-router-dom"
                 credentials: 'include',
         })
         .then((resp) => {
-            console.log(resp)
             if (resp.ok) {
                 resp.json().then((userData) => {
-                    console.log(userData)
                     login(userData)})
                 navigate("/posts_page")
             } else {

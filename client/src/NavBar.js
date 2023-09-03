@@ -5,7 +5,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { UserContext } from './context/UserContext'
 import PostModal from './PostModal'
 
-export default function NavBar({ setPosts }) {
+export default function NavBar() {
     const { currentUser, logout, isLoggedIn } = useContext(UserContext)
     const navigate = useNavigate()
     const location = useLocation()
@@ -88,10 +88,9 @@ export default function NavBar({ setPosts }) {
         </div>
         <PostModal 
             isOpen={isPostModalOpen} 
-            togglePostModal={togglePostModal}
-            setPosts={setPosts} 
+            togglePostModal={togglePostModal} 
+            
         />
-       
         </>
     )
     }

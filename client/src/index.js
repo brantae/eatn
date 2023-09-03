@@ -6,14 +6,17 @@ import './index.css'
 import 'semantic-ui-css/semantic.min.css'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { UserProvider } from './context/UserContext'
+import { PostProvider } from './context/PostContext'
 
 
 ReactDOM.render(
   
   <UserProvider>
+    <PostProvider>
   <Router>
   <App />
   </Router>
+  </PostProvider>
   </UserProvider>,
   document.getElementById('root')
 );

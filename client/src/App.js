@@ -7,37 +7,22 @@ import PostsPage from "./PostsPage"
 import NavBar from "./NavBar"
 import UserProfile from "./UserProfile"
 import { UserContext } from './context/UserContext'
+import { PostContext } from "./context/PostContext"
 
 
 function App() {
 
-  const [posts, setPosts] = useState([])
-
-  const { isLoggedIn, login, logout, setCurrentUser, setIsLoggedIn } = useContext(UserContext)
-
-  useEffect(() => {
-    if (isLoggedIn) {
-    fetch('/posts')
-        .then((response) => response.json())
-        .then((data) => {
-        setPosts(data)
-        });
-    } else {
-    setPosts([])
-    }
-}, [isLoggedIn])
 
 
-
-  return (
+return (
     <div className="App">
       
-      <NavBar posts={posts} setPosts={setPosts}/>
+      <NavBar />
         <Routes>
           <Route exact path="/" element={<Home/>} />
           <Route exact path="/login" element = {<Login />} />
           <Route exact path="/sign_up" element = {<SignUp />}/>
-          <Route exact path="/posts_page" element = {<PostsPage posts={posts}/>}/>
+          <Route exact path="/posts_page" element = {<PostsPage />}/>
           <Route exact path="/profile" element = {<UserProfile />}/>
         </Routes>
         
