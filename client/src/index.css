@@ -94,3 +94,10 @@ code {
   transform: translateY(100px) scale(0) rotateY(180deg);
   opacity: 0;
 }
+
+.flair {
+  background-color: rgba(141, 140, 140, 0.267);
+  color: #000000;
+}
+
+

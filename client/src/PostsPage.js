@@ -13,12 +13,13 @@ export default function PostsPage({posts}) {
         <div>
         {isLoggedIn ? (
             posts.map((post) => (
+
             <PostCard
                 key={post.id}
                 image={post.image}
                 caption={post.caption}
                 author={post.user_name}
-                // flair={post.flair}
+                flair={post.flairs}
             />
             ))
         ) : (

@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import { Card, Image, Icon, Modal, Button } from 'semantic-ui-react';
 
-export default function PostCard({ image, caption, author, flair, canEdit, onDeleteClick, onEditClick }) {
+export default function PostCard({ image, caption, author, flair }) {
 
 
 
@@ -11,7 +10,11 @@ export default function PostCard({ image, caption, author, flair, canEdit, onDel
         <Card.Content>
             <Card.Header>{author}</Card.Header>
             <Card.Meta>
-            <span className="date">{flair}</span>
+            {flair.map((individualFlair, index) => (
+                        <span className='flair' key={index}>
+                            {individualFlair}
+                        </span>
+                    ))}
             </Card.Meta>
             <Card.Description>{caption}</Card.Description>
         </Card.Content>
