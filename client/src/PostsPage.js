@@ -20,6 +20,7 @@ export default function PostsPage() {
                 caption={post.caption}
                 author={post.user_name}
                 flair={post.flairs}
+                post={post}
             />
             ))
         ) : (

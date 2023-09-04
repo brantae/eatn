@@ -8,6 +8,7 @@ import NavBar from "./NavBar"
 import UserProfile from "./UserProfile"
 import { UserContext } from './context/UserContext'
 import { PostContext } from "./context/PostContext"
+import EditPost from "./EditPost"
 
 
 function App() {

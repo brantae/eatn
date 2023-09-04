@@ -1,9 +1,22 @@
 import { Card, Image, Button } from 'semantic-ui-react'
-import { useContext } from 'react';
+import { useContext, useState } from 'react'
+import { UserContext } from './context/UserContext';
+import EditPost from './EditPost';
 
-export default function PostCard({ image, caption, author, flair }) {
 
+export default function PostCard({ image, caption, author, flair, post }) {
 
+    const [editModalOpen, setEditModalOpen] = useState(false)
+    const { currentUser } = useContext(UserContext)
+
+    const isCurrentUserPost = currentUser && currentUser.name === author
+
+    const handleEditClick = () => {
+        console.log('Edit button clicked')
+        setEditModalOpen(true);
+      }
+
+      console.log('editModalOpen:', editModalOpen)
 
     return (
         <Card centered>
@@ -20,10 +33,36 @@ export default function PostCard({ image, caption, author, flair }) {
             <Card.Description>{caption}</Card.Description>
         </Card.Content>
         <Card.Content extra>
-        </Card.Content>
-        </Card>
-    );
+        {isCurrentUserPost && (
+          <>
+            <Button floated='right' onClick={handleEditClick}>
+              Edit
+            </Button>
+            <EditPost
+              post={post}
+              open={editModalOpen} // Pass the open state to control the modal's visibility
+              onClose={() => setEditModalOpen(false)}
+            />
+          </>
+        )}
+      </Card.Content>
+    </Card>
+  );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
