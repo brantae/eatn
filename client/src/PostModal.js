@@ -7,8 +7,8 @@ export default function PostModal({isOpen, togglePostModal}) {
     const {posts, setPosts} = useContext(PostContext)
 
     const [imageFile, setImageFile] = useState(null)
-    // const [existingFlairs, setExistingFlairs] = useState([])
-    // const [selectedFlair, setSelectedFlair] = useState([])
+    const [existingFlairs, setExistingFlairs] = useState([])
+    const [selectedFlairs, setSelectedFlairs] = useState([])
     const [errors, setErrors] = useState([])
 
     useEffect(() => {
@@ -17,6 +17,7 @@ export default function PostModal({isOpen, togglePostModal}) {
             .then((response) => response.json())
             .then((data) => {
             console.log(data)
+            setExistingFlairs(data)
             })
             .catch((error) => {
                 console.error('Error fetching existing flairs:', error)
@@ -34,20 +35,21 @@ export default function PostModal({isOpen, togglePostModal}) {
     }
 
     const handleSelectFlair = (_, { value }) => {
-
+        console.log(value)
+        setSelectedFlairs(value)
+        console.log(selectedFlairs)
       }
       
-    const handleRemoveFlair = (flairToRemove) => {
-
-        }
 
     function handleSubmit(e) { 
         e.preventDefault()
         
         const data = new FormData()
-        data.append("posts[caption]", e.target.caption.value)
-        data.append("posts[image]", imageFile)
-        // data.append('post[flair_ids][]', selectedFlair)
+        data.append("post[caption]", e.target.caption.value)
+        data.append("post[image]", imageFile)
+        selectedFlairs.forEach((flairId) => {
+            data.append("post[flair_ids][]", flairId)
+        })
         
         fetch('/posts', {
             method: "POST",
@@ -72,9 +74,6 @@ export default function PostModal({isOpen, togglePostModal}) {
         })
     }
 
-    function flairOptions() {
-
-    }
 
 
     return (
@@ -95,8 +94,12 @@ export default function PostModal({isOpen, togglePostModal}) {
                             placeholder="add some flair!"
                             fluid
                             selection
-                            options={null}
-                            onChange={null}
+                            options={existingFlairs.map((flair) => ({
+                                key: flair.id,
+                                value: flair.id,
+                                text: flair.name,
+                            }))}
+                            onChange={handleSelectFlair}
                             multiple={true}
                                     />
                         <Form.Input type="file" label="image" accept="image/*" name="image" onChange={handleImageChange} />

@@ -2,7 +2,7 @@ class PostsController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
     wrap_parameters format: []
-    #before_action :authorize, only: [:create, :destroy]
+    before_action :authorize, only: [:create, :update, :destroy]
 
     def index 
         posts = Post.all
@@ -18,6 +18,19 @@ class PostsController < ApplicationController
         post = Post.create!(post_params)
         render json: post
     end
+
+    def update
+        post = Post.find(params[:id])
+        if post.user == @current_user
+            if post.update(post_params)
+            render json: post, status: :ok
+            else
+            render json: { errors: post.errors.full_messages }, status: :unprocessable_entity
+            end
+        else
+            render json: { errors: 'Unauthorized' }, status: :unauthorized
+        end
+            end
 
     def destroy 
         post = Post.find(params[:id])

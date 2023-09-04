@@ -1,4 +1,5 @@
-import { Card, Image } from 'semantic-ui-react';
+import { Card, Image, Button } from 'semantic-ui-react'
+import { useContext } from 'react';
 
 export default function PostCard({ image, caption, author, flair }) {
 

@@ -11,10 +11,12 @@ class UsersController < ApplicationController
     end
 
     def show 
-        if @current_user
-            render json: @current_user, status: :ok
+        if params[:id]
+            user = User.find(params[:id])
+            render json: user
         else
-            render json: {error: "Not Authorized"}, status: :unauthorized
+            user = User.find_by(id: session[:user_id])
+            render json: user
         end
     end
 

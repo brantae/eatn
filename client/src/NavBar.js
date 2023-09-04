@@ -38,6 +38,7 @@ export default function NavBar() {
             }
         })
         .then(() => {
+            console.log("user logged out")
             logout()
             navigate('/')
         })
@@ -73,10 +74,10 @@ export default function NavBar() {
                 </Menu.Item>
                 ) : (
                 <Menu.Item position="right">
-                    <Link to="/login">login</Link>
+                    <Link to="/login">Login</Link>
                 </Menu.Item>
                 )}
-                {isLoggedIn && (
+                {isLoggedIn && currentUser && (
                 <Menu.Item position="right">
                     hello, {currentUser.name}
                 </Menu.Item>

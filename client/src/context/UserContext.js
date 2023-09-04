@@ -6,41 +6,24 @@ function UserProvider({ children }) {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [currentUser, setCurrentUser] = useState(null)
-    const [isLoading, setIsLoading] = useState(true)
 
-    // useEffect(() => {
-    //     fetch('/me')
-    //     .then(resp => resp.json())
-    //     .then(data => {
-    //         console.log(data)
-    //         console.log(currentUser)
-    //         if (data.error) {
-    //         setIsLoggedIn(false)
-    //         setCurrentUser({})
-    //         } else {
-    //         setIsLoggedIn(true)
-    //     }
-    //     }) 
-    // }, [])
 
-        useEffect(() => {
-            fetch('/me')
-            .then((resp) => {
-                if (resp.ok) {
-                return resp.json()
-                } else {
-                throw new Error('User not authenticated')
+    useEffect(() => {
+        fetch('/me')
+          .then((r) => {
+            if (r.ok) {
+              r.json().then((user) => {
+                if (user !== null) {
+                  setCurrentUser(user)
+                  setIsLoggedIn(true)
                 }
-            })
-            .then((data) => {
-                login(data)
-                setIsLoading(false)
-            })
-            .catch((error) => {
-                logout()
-                setIsLoading(false)
-            })
-        }, [])
+              })
+            }
+          })
+          .catch((error) => {
+            console.log('Error:', error)
+          })
+      }, [])
     
 
 
@@ -48,12 +31,16 @@ function UserProvider({ children }) {
     function login(currentUser) {
         setCurrentUser(currentUser)
         setIsLoggedIn(true)
+        console.log(currentUser)
+        console.log(isLoggedIn)
     }
 
 //Logout
     function logout() {
         setCurrentUser({})
         setIsLoggedIn(false)
+        console.log(currentUser)
+        console.log(isLoggedIn)
     }
 
 //Signup

@@ -17,14 +17,6 @@ import { useNavigate } from "react-router-dom"
     const navigate = useNavigate()
 
 
-//handlers
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target
-    //     setFormData({
-    //         ...formData,
-    //         [name]: value,
-    // })
-    // }
 
     function handleSubmit(event) {
         event.preventDefault()
