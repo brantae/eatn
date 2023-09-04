@@ -5,4 +5,9 @@ class FlairsController < ApplicationController
         render json: flairs
     end
 
+    def show
+        flair = Flair.find(params[:id])
+        render json: flair
+    end
+
 end

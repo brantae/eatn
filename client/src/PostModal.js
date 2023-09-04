@@ -5,24 +5,23 @@ import { PostContext } from './context/PostContext'
 export default function PostModal({isOpen, togglePostModal}) {
 
     const {posts, setPosts} = useContext(PostContext)
-    
-    // const [caption, setCaption] = useState('')
+
     const [imageFile, setImageFile] = useState(null)
-    const [flairInput, setFlairInput] = useState('')
-    const [existingFlairs, setExistingFlairs] = useState([])
-    const [selectedFlair, setSelectedFlair] = useState('')
+    // const [existingFlairs, setExistingFlairs] = useState([])
+    // const [selectedFlair, setSelectedFlair] = useState([])
+    const [errors, setErrors] = useState([])
 
     useEffect(() => {
-        // Fetch existing flair options when the component mounts
+        
         fetch('/flairs')
             .then((response) => response.json())
             .then((data) => {
-            setExistingFlairs(data);
+            console.log(data)
             })
             .catch((error) => {
-                console.error('Error fetching existing flairs:', error);
-            });
-        }, []);
+                console.error('Error fetching existing flairs:', error)
+            })
+        }, [])
 
 
     const handleClose = () => {
@@ -35,44 +34,52 @@ export default function PostModal({isOpen, togglePostModal}) {
     }
 
     const handleSelectFlair = (_, { value }) => {
-        // Update selected flairs
-        setSelectedFlair([...selectedFlair, value]);
-      }
 
-      const handleRemoveFlair = (flairToRemove) => {
-        // Remove the selected flair
-        setSelectedFlair(selectedFlair.filter((flair) => flair !== flairToRemove));
       }
+      
+    const handleRemoveFlair = (flairToRemove) => {
+
+        }
 
     function handleSubmit(e) { 
         e.preventDefault()
         
         const data = new FormData()
         data.append("posts[caption]", e.target.caption.value)
-        data.append("posts[image]", e.target.image.files[0])
-        data.append('post[flair]', selectedFlair.join(','))
+        data.append("posts[image]", imageFile)
+        // data.append('post[flair_ids][]', selectedFlair)
         
         fetch('/posts', {
             method: "POST",
             body: data
         })
-        .then(res => res.json())
+        .then((res) => {
+            if (res.status === 200) {
+                setErrors([]);
+                return res.json();
+            } else {
+                return res.json().then((data) => Promise.reject(data.errors));
+            }
+        })
         .then(data => {
             setPosts([...posts, data])
             togglePostModal()
         })
+        .catch(errors => {
+            console.error('Validation errors:', errors)
+            setErrors(errors)
+            
+        })
     }
 
-    const flairOptions = existingFlairs.map((flair) => ({
-        key: flair.name,
-        text: flair.name,
-        value: flair.name,
-      }))
+    function flairOptions() {
+
+    }
 
 
     return (
         <>
-<Modal open={isOpen}>
+            <Modal open={isOpen}>
                 <Modal.Header>
                     post your eat
                     <Icon name="window close outline" onClick={handleClose} style={{ float: 'right', cursor: 'pointer' }} />
@@ -84,29 +91,28 @@ export default function PostModal({isOpen, togglePostModal}) {
                             placeholder="enter your post caption..."
                             name="caption"
                         />
-                        {selectedFlair.length > 0 && (
-                        <div>
-                            {selectedFlair.map((flair) => (
-                            <Label key={flair}>
-                                {flair}
-                                <Icon name="delete" onClick={() => handleRemoveFlair(flair)} />
-                            </Label>
-                            ))}
-                        </div>
-                        )}
                         <Dropdown
-                            placeholder="Select a flair"
+                            placeholder="add some flair!"
                             fluid
                             selection
-                            options={flairOptions}
-                            onChange={handleSelectFlair}
-                            value={selectedFlair}
+                            options={null}
+                            onChange={null}
+                            multiple={true}
                                     />
                         <Form.Input type="file" label="image" accept="image/*" name="image" onChange={handleImageChange} />
                         <Button color='grey' type="submit">
                             post
                         </Button>
                     </Form>
+                    {errors.length > 0 && (
+                        <div className="ui error message">
+                        <ul className="list">
+                            {errors.map((error, index) => (
+                            <li key={index}>{error}</li>
+                            ))}
+                        </ul>
+                        </div>
+                    )}
                 </Modal.Content>
             </Modal>
         </>

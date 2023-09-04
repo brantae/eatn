@@ -2,6 +2,7 @@ class PostsController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
     wrap_parameters format: []
+    #before_action :authorize, only: [:create, :destroy]
 
     def index 
         posts = Post.all
@@ -9,7 +10,7 @@ class PostsController < ApplicationController
     end
 
     def show 
-        post = Post.find_by(params[:id])
+        post = Post.find(params[:id])
         render json: post 
     end
 
@@ -18,10 +19,16 @@ class PostsController < ApplicationController
         render json: post
     end
 
+    def destroy 
+        post = Post.find(params[:id])
+        post.destroy 
+        head :no_content
+    end
+
     private 
 
-    def post_params 
-        params.permit(:caption, :user_id, :image)
+    def post_params
+        params.require(:post).permit(:caption, :image, flair_ids: []).merge(user_id: session[:user_id])
     end
 
     def render_not_found_response 

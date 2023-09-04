@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
   resources :users 
-  resources :posts 
+  resources :posts do 
+    resources :flairs
+  end 
   resources :flairs
 
   post '/sign_up', to: 'users#create'

@@ -3,14 +3,16 @@ class UsersController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
     wrap_parameters format: []
 
+    #skip_before_action :authorize, only: :create
+
     def index 
         users = User.all 
         render json: users
     end
 
     def show 
-        if current_user
-            render json: current_user, status: :ok
+        if @current_user
+            render json: @current_user, status: :ok
         else
             render json: {error: "Not Authorized"}, status: :unauthorized
         end
