@@ -3,8 +3,10 @@ Rails.application.routes.draw do
   resources :users 
   resources :posts do 
     resources :flairs
+    resources :comments
   end 
   resources :flairs
+  resources :comments
 
   post '/sign_up', to: 'users#create'
   get '/me', to: 'users#show'
