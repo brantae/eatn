@@ -16,8 +16,6 @@ export default function PostCard({ image, caption, author, flair, post }) {
         setEditModalOpen(true);
       }
 
-      console.log('editModalOpen:', editModalOpen)
-
     return (
         <Card centered>
         <Image src={image} wrapped ui={false} />
@@ -40,7 +38,8 @@ export default function PostCard({ image, caption, author, flair, post }) {
             </Button>
             <EditPost
               post={post}
-              open={editModalOpen} // Pass the open state to control the modal's visibility
+              open={editModalOpen} 
+              onEdit={() => setEditModalOpen(false)}
               onClose={() => setEditModalOpen(false)}
             />
           </>

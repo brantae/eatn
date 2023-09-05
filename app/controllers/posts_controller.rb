@@ -15,14 +15,14 @@ class PostsController < ApplicationController
     end
 
     def create 
-        post = Post.create!(post_params)
+        post = Post.create!(create_post_params)
         render json: post
     end
 
     def update
         post = Post.find(params[:id])
         if post.user == @current_user
-            if post.update(post_params)
+            if post.update(update_post_params)
             render json: post, status: :ok
             else
             render json: { errors: post.errors.full_messages }, status: :unprocessable_entity
@@ -40,7 +40,11 @@ class PostsController < ApplicationController
 
     private 
 
-    def post_params
+    def update_post_params
+        params.require(:post).permit(:caption, flair_ids: [])
+    end
+
+    def create_post_params
         params.require(:post).permit(:caption, :image, flair_ids: []).merge(user_id: session[:user_id])
     end
 

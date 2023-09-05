@@ -1,28 +1,30 @@
 import { useState, useContext, useEffect } from 'react'
 import { Modal, Button, Form, Icon, Dropdown, Label } from 'semantic-ui-react'
 import { PostContext } from './context/PostContext'
+import { useFlairContext } from './context/FlairContext'
 
 export default function PostModal({isOpen, togglePostModal}) {
 
     const {posts, setPosts} = useContext(PostContext)
+    const {existingFlairs, setExistingFlairs} = useFlairContext()
 
     const [imageFile, setImageFile] = useState(null)
-    const [existingFlairs, setExistingFlairs] = useState([])
+    // const [existingFlairs, setExistingFlairs] = useState([])
     const [selectedFlairs, setSelectedFlairs] = useState([])
     const [errors, setErrors] = useState([])
 
-    useEffect(() => {
+    // useEffect(() => {
         
-        fetch('/flairs')
-            .then((response) => response.json())
-            .then((data) => {
-            console.log(data)
-            setExistingFlairs(data)
-            })
-            .catch((error) => {
-                console.error('Error fetching existing flairs:', error)
-            })
-        }, [])
+    //     fetch('/flairs')
+    //         .then((response) => response.json())
+    //         .then((data) => {
+    //         console.log(data)
+    //         setExistingFlairs(data)
+    //         })
+    //         .catch((error) => {
+    //             console.error('Error fetching existing flairs:', error)
+    //         })
+    //     }, [])
 
 
     const handleClose = () => {

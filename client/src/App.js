@@ -6,8 +6,7 @@ import SignUp from "./SignUp"
 import PostsPage from "./PostsPage"
 import NavBar from "./NavBar"
 import UserProfile from "./UserProfile"
-import { UserContext } from './context/UserContext'
-import { PostContext } from "./context/PostContext"
+import { FlairProvider } from "./context/FlairContext"
 import EditPost from "./EditPost"
 
 
@@ -17,7 +16,7 @@ function App() {
 
 return (
     <div className="App">
-      
+      <FlairProvider>
       <NavBar />
         <Routes>
           <Route exact path="/" element={<Home/>} />
@@ -26,7 +25,7 @@ return (
           <Route exact path="/posts_page" element = {<PostsPage />}/>
           <Route exact path="/profile" element = {<UserProfile />}/>
         </Routes>
-        
+        </FlairProvider>
     </div>
   )
 }

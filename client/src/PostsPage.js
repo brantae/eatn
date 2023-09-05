@@ -8,7 +8,6 @@ export default function PostsPage() {
     const { isLoggedIn } = useContext(UserContext)
     const { posts } = useContext(PostContext)
 
-    console.log(posts)
 
     return (
         <div>

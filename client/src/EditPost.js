@@ -1,60 +1,102 @@
-import React, { useState } from 'react';
-import { Modal, Button, Form, Icon } from 'semantic-ui-react';
+import React, { useContext, useState, useEffect } from 'react'
+import { Modal, Button, Form, Icon } from 'semantic-ui-react'
+import { useFlairContext } from './context/FlairContext'
+import { PostContext } from './context/PostContext'
 
 function EditPost({ post, open, onEdit, onClose }) {
-  const [caption, setCaption] = useState(post.caption);
-  const [selectedFlairs, setSelectedFlairs] = useState(post.flairs);
 
-  const handleSubmit = () => {
-    // Make an API request to update the post with the edited data
-    // Ensure you pass the updated post data to the API endpoint
+    const { existingFlairs, setExistingFlairs} = useFlairContext()
+    const { posts, setPosts } = useContext(PostContext)
+    const [caption, setCaption] = useState(post.caption)
+    const [selectedFlairs, setSelectedFlairs] = useState(post.flairs_ids)
 
-    // After a successful update, call onEdit to update the post in your UI
-    // For example, onEdit(updatedPost);
+    console.log('selectedFlairs:', selectedFlairs)
+    console.log('post.flairs:', post.flairs)
 
-    // Close the modal
-    onClose();
-  };
 
-  const handleClose = () => {
-    // Close the modal when needed
-    onClose();
-  };
+    const handleSubmit = () => {
+        const updatedPost = {
+            ...post,
+            caption,
+            flair_ids: selectedFlairs,
+            }
 
-  return (
-    <>
-      <Modal open={open} onClose={handleClose}>
-        <Modal.Header>
-            edit your eat
-            <Icon name="window close outline" onClick={handleClose} style={{ float: 'right', cursor: 'pointer' }} />
-            </Modal.Header>
-        <Modal.Content>
-          <Form onSubmit={handleSubmit}>
-            <Form.TextArea
-              label="Caption"
-              placeholder="Edit caption..."
-              value={caption}
-              onChange={(e) => setCaption(e.target.value)}
+            console.log('Updated Post:', updatedPost)
+
+            fetch(`/posts/${post.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ post: updatedPost }),
+            })
+                .then((response) => {
+                if (response.ok) {
+                    
+                    onEdit(updatedPost);
+                    
+                    
+                    onClose()
+                } else {
+                
+                    return response.json().then((errorData) => {
+                    console.error('Error updating post:', errorData)
+                    
+                    })
+                }
+                })
+                .catch((error) => {
+                console.error('Error updating post:', error)
+                })
+
+    }
+
+    const handleChange = (_, { value }) => {
+        setSelectedFlairs(value)
+        }
+
+        const handleClose = () => {
+            onClose()
+        }
+
+        const flairOptions = existingFlairs.map((flair) => ({
+            key: flair.id,
+            value: flair.id,
+            text: flair.name,
+        }))
+
+    return (
+        <>
+        <Modal open={open} onClose={handleClose}>
+            <Modal.Header>
+                edit your eat
+                <Icon name="window close outline" onClick={handleClose} style={{ float: 'right', cursor: 'pointer' }} />
+                </Modal.Header>
+            <Modal.Content>
+            <Form onSubmit={handleSubmit}>
+                <Form.TextArea
+                label="caption"
+                placeholder="edit caption..."
+                value={caption}
+                onChange={(e) => setCaption(e.target.value)}
             />
-            {/* Create a dropdown or multi-select input for flair selection */}
-            {/* Example:
             <Form.Dropdown
-              label="Flair"
-              placeholder="Select flair"
-              fluid
-              multiple
-              selection
-              options={flairOptions}
-              value={selectedFlairs}
-              onChange={(_, { value }) => setSelectedFlairs(value)}
-            />
-            */}
-            <Button type="submit">Save Changes</Button>
-          </Form>
-        </Modal.Content>
-      </Modal>
-    </>
-  );
-}
+                label="flair"
+                placeholder="edit flair"
+                fluid
+                multiple
+                selection
+                options={flairOptions}
+                value={selectedFlairs}
+                onChange={handleChange}
+                />
+            
+                <Button type="submit">save changes</Button>
+            </Form>
+            </Modal.Content>
+        </Modal>
+        </>
+    )
+    }
 
 export default EditPost;
