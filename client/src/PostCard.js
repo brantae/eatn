@@ -14,7 +14,7 @@ export default function PostCard({ image, caption, author, flair, post, updatePo
     const handleEditClick = () => {
         console.log('Edit button clicked')
         setEditModalOpen(true);
-      }
+    }
 
     return (
         <Card centered>
@@ -32,26 +32,25 @@ export default function PostCard({ image, caption, author, flair, post, updatePo
         </Card.Content>
         <Card.Content extra>
         {isCurrentUserPost && (
-          <>
-            <Button floated='right' onClick={handleEditClick}>
-              Edit
-            </Button>
-            <EditPost
-              post={post}
-              open={editModalOpen} 
-              onEdit={(updatedPost) => {
-                // Call the updatePosts callback to update the posts state
-                updatePosts(updatedPost);
-                setEditModalOpen(false);
-              }}
-              onClose={() => setEditModalOpen(false)}
-              updatePosts={updatePosts}
-            />
-          </>
-        )}
-      </Card.Content>
-    </Card>
-  );
+            <>
+                <Button floated='right' onClick={handleEditClick}>
+                Edit
+                </Button>
+                <EditPost
+                post={post}
+                open={editModalOpen} 
+                onEdit={(updatedPost) => {
+                    updatePosts(updatedPost)
+                    setEditModalOpen(false)
+                }}
+                onClose={() => setEditModalOpen(false)}
+                updatePosts={updatePosts}
+                />
+            </>
+            )}
+        </Card.Content>
+        </Card>
+    )
 }
 
 

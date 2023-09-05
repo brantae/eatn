@@ -7,7 +7,6 @@ import PostsPage from "./PostsPage"
 import NavBar from "./NavBar"
 import UserProfile from "./UserProfile"
 import { FlairProvider } from "./context/FlairContext"
-import EditPost from "./EditPost"
 
 
 function App() {

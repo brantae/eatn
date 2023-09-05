@@ -10,37 +10,32 @@ function UserProvider({ children }) {
 
     useEffect(() => {
         fetch('/me')
-          .then((r) => {
-            if (r.ok) {
-              r.json().then((user) => {
-                if (user !== null) {
-                  setCurrentUser(user)
-                  setIsLoggedIn(true)
+            .then((r) => {
+                if (r.ok) {
+                r.json().then((user) => {
+                    if (user !== null) {
+                    setCurrentUser(user)
+                    setIsLoggedIn(true)
+                    }
+                })
                 }
-              })
-            }
-          })
-          .catch((error) => {
-            console.log('Error:', error)
-          })
-      }, [])
-    
+            })
+            .catch((error) => {
+                console.log('Error:', error)
+            })
+        }, [])
 
 
     //Login
     function login(currentUser) {
         setCurrentUser(currentUser)
         setIsLoggedIn(true)
-        console.log(currentUser)
-        console.log(isLoggedIn)
     }
 
 //Logout
     function logout() {
         setCurrentUser({})
         setIsLoggedIn(false)
-        console.log(currentUser)
-        console.log(isLoggedIn)
     }
 
 //Signup

@@ -9,9 +9,8 @@ export default function PostsPage() {
     const { posts, setPosts } = useContext(PostContext)
 
     const updatePosts = (updatedPost) => {
-        const updatedPosts = posts.map((p) => (p.id === updatedPost.id ? updatedPost : p));
-        setPosts(updatedPosts);
-        console.log('Posts updated successfully in PostsPage.')
+        const updatedPosts = posts.map((p) => (p.id === updatedPost.id ? updatedPost : p))
+        setPosts(updatedPosts)
     }
 
     return (

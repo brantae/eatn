@@ -17,13 +17,10 @@ function EditPost({ post, open, onEdit, onClose, updatePosts }) {
             caption,
             flair_ids: selectedFlairs,
             flairs: selectedFlairs.map((flairId) => {
-                // Map flair IDs to their corresponding names
-                const flair = existingFlairs.find((f) => f.id === flairId);
-                return flair ? flair.name : ''; // Return the flair name or an empty string if not found
+                const flair = existingFlairs.find((f) => f.id === flairId)
+                return flair ? flair.name : ''
               }),
             }
-
-            console.log('Updated Post:', updatedPost)
 
             fetch(`/posts/${post.id}`, {
             method: 'PATCH',
@@ -34,13 +31,8 @@ function EditPost({ post, open, onEdit, onClose, updatePosts }) {
             })
                 .then((response) => {
                 if (response.ok) {
-                    console.log('Post updated successfully.')
-                    console.log(updatedPost)
-                    const updatedPosts = posts.map((p) => (p.id === updatedPost.id ? updatedPost : p));
+                    const updatedPosts = posts.map((p) => (p.id === updatedPost.id ? updatedPost : p))
                     setPosts(updatedPosts)
-                    // onEdit(updatedPost);
-                    
-                    
                     updatePosts(updatedPost)
                     onClose()
                 } else {
@@ -58,25 +50,18 @@ function EditPost({ post, open, onEdit, onClose, updatePosts }) {
     }
 
     const handleChange = (_, { value }) => {
-        console.log(value)
         setSelectedFlairs(value)
-        console.log(selectedFlairs)
         }
 
         const handleClose = () => {
             onClose()
         }
 
-        console.log(existingFlairs)
-
         const flairOptions = existingFlairs.map((flair) => ({
             key: flair.id,
             value: flair.id,
             text: flair.name,
         }))
-
-        console.log(flairOptions)
-        
 
     return (
         <>

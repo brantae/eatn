@@ -37,11 +37,8 @@ export default function PostModal({isOpen, togglePostModal}) {
     }
 
     const handleSelectFlair = (_, { value }) => {
-        console.log(value)
         setSelectedFlairs(value)
-        console.log(selectedFlairs)
-      }
-      
+    }
 
     function handleSubmit(e) { 
         e.preventDefault()
@@ -59,10 +56,10 @@ export default function PostModal({isOpen, togglePostModal}) {
         })
         .then((res) => {
             if (res.status === 200) {
-                setErrors([]);
-                return res.json();
+                setErrors([])
+                return res.json()
             } else {
-                return res.json().then((data) => Promise.reject(data.errors));
+                return res.json().then((data) => Promise.reject(data.errors))
             }
         })
         .then(data => {
