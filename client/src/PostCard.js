@@ -12,7 +12,7 @@ export default function PostCard({ image, caption, author, flair, post, updatePo
     const [deleteModalOpen, setDeleteModalOpen] = useState(false)
     const { currentUser } = useContext(UserContext)
     const { posts, setPosts } = useContext(PostContext)
-
+    console.log(posts)
     const isCurrentUserPost = currentUser && currentUser.name === author
 
     const handleEditClick = () => {

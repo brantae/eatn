@@ -9,26 +9,14 @@ export default function PostModal({isOpen, togglePostModal}) {
     const {existingFlairs, setExistingFlairs} = useFlairContext()
 
     const [imageFile, setImageFile] = useState(null)
-    // const [existingFlairs, setExistingFlairs] = useState([])
     const [selectedFlairs, setSelectedFlairs] = useState([])
     const [errors, setErrors] = useState([])
-
-    // useEffect(() => {
-        
-    //     fetch('/flairs')
-    //         .then((response) => response.json())
-    //         .then((data) => {
-    //         console.log(data)
-    //         setExistingFlairs(data)
-    //         })
-    //         .catch((error) => {
-    //             console.error('Error fetching existing flairs:', error)
-    //         })
-    //     }, [])
+    const [formKey, setFormKey] = useState(0)
 
 
     const handleClose = () => {
         togglePostModal()
+        setErrors([])
     }
 
     const handleImageChange = (event) => {
@@ -42,42 +30,47 @@ export default function PostModal({isOpen, togglePostModal}) {
 
     function handleSubmit(e) { 
         e.preventDefault()
+
+        console.log("Form data:", e.target)
         
         const data = new FormData()
         data.append("post[caption]", e.target.caption.value)
+        if (!imageFile) {
+            setErrors(["Image cannot be blank"])
+            return
+        }
         data.append("post[image]", imageFile)
         selectedFlairs.forEach((flairId) => {
             data.append("post[flair_ids][]", flairId)
         })
         
         fetch('/posts', {
-            method: "POST",
+            method: 'POST',
             body: data
-        })
-        .then((res) => {
-            if (res.status === 200) {
-                setErrors([])
-                return res.json()
-            } else {
-                return res.json().then((data) => Promise.reject(data.errors))
-            }
-        })
-        .then(data => {
-            setPosts([...posts, data])
-            togglePostModal()
-        })
-        .catch(errors => {
-            console.error('Validation errors:', errors)
-            setErrors(errors)
-            
-        })
+            })
+                .then((response) => {
+                if (response.ok) {
+                    setFormKey(formKey + 1)
+                    return response.json();
+                } else {
+                    return response.json().then((errorData) => Promise.reject(errorData.errors));
+                }
+                })
+                .then((data) => {
+                setPosts([...posts, data]);
+                togglePostModal();
+                })
+                .catch((errors) => {
+                console.error('Validation errors:', errors);
+                setErrors(errors);
+                });
     }
 
 
 
     return (
         <>
-            <Modal open={isOpen}>
+            <Modal open={isOpen} key={formKey}>
                 <Modal.Header>
                     post your eat
                     <Icon name="window close outline" onClick={handleClose} style={{ float: 'right', cursor: 'pointer' }} />
@@ -106,7 +99,7 @@ export default function PostModal({isOpen, togglePostModal}) {
                             post
                         </Button>
                     </Form>
-                    {errors.length > 0 && (
+                    {errors && errors.length > 0 && (
                         <div className="ui error message">
                         <ul className="list">
                             {errors.map((error, index) => (

@@ -14,10 +14,14 @@ class PostsController < ApplicationController
         render json: post 
     end
 
-    def create 
-        post = Post.create!(create_post_params)
-        render json: post
-    end
+    def create
+        post = Post.create(create_post_params)
+        if post.persisted?
+          render json: post, status: :ok
+        else
+          render json: { errors: post.errors.full_messages }, status: :unprocessable_entity
+        end
+      end
 
     def update
         post = Post.find(params[:id])
