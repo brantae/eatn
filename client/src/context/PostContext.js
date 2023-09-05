@@ -16,6 +16,10 @@ function PostProvider({ children }) {
 
     }, [])
 
+    useEffect(() => {
+        console.log('Posts state updated:', posts)
+    }, [posts])
+
 
     return (
         <PostContext.Provider value={{posts, setPosts}}>

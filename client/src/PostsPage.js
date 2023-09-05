@@ -6,8 +6,13 @@ import { PostContext } from './context/PostContext'
 export default function PostsPage() {
     
     const { isLoggedIn } = useContext(UserContext)
-    const { posts } = useContext(PostContext)
+    const { posts, setPosts } = useContext(PostContext)
 
+    const updatePosts = (updatedPost) => {
+        const updatedPosts = posts.map((p) => (p.id === updatedPost.id ? updatedPost : p));
+        setPosts(updatedPosts);
+        console.log('Posts updated successfully in PostsPage.')
+    }
 
     return (
         <div>
@@ -20,6 +25,7 @@ export default function PostsPage() {
                 author={post.user_name}
                 flair={post.flairs}
                 post={post}
+                updatePosts={updatePosts}
             />
             ))
         ) : (

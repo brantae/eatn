@@ -3,15 +3,12 @@ import { Modal, Button, Form, Icon } from 'semantic-ui-react'
 import { useFlairContext } from './context/FlairContext'
 import { PostContext } from './context/PostContext'
 
-function EditPost({ post, open, onEdit, onClose }) {
+function EditPost({ post, open, onEdit, onClose, updatePosts }) {
 
     const { existingFlairs, setExistingFlairs} = useFlairContext()
     const { posts, setPosts } = useContext(PostContext)
     const [caption, setCaption] = useState(post.caption)
     const [selectedFlairs, setSelectedFlairs] = useState(post.flairs_ids)
-
-    console.log('selectedFlairs:', selectedFlairs)
-    console.log('post.flairs:', post.flairs)
 
 
     const handleSubmit = () => {
@@ -19,6 +16,11 @@ function EditPost({ post, open, onEdit, onClose }) {
             ...post,
             caption,
             flair_ids: selectedFlairs,
+            flairs: selectedFlairs.map((flairId) => {
+                // Map flair IDs to their corresponding names
+                const flair = existingFlairs.find((f) => f.id === flairId);
+                return flair ? flair.name : ''; // Return the flair name or an empty string if not found
+              }),
             }
 
             console.log('Updated Post:', updatedPost)
@@ -32,10 +34,14 @@ function EditPost({ post, open, onEdit, onClose }) {
             })
                 .then((response) => {
                 if (response.ok) {
+                    console.log('Post updated successfully.')
+                    console.log(updatedPost)
+                    const updatedPosts = posts.map((p) => (p.id === updatedPost.id ? updatedPost : p));
+                    setPosts(updatedPosts)
+                    // onEdit(updatedPost);
                     
-                    onEdit(updatedPost);
                     
-                    
+                    updatePosts(updatedPost)
                     onClose()
                 } else {
                 
@@ -52,18 +58,25 @@ function EditPost({ post, open, onEdit, onClose }) {
     }
 
     const handleChange = (_, { value }) => {
+        console.log(value)
         setSelectedFlairs(value)
+        console.log(selectedFlairs)
         }
 
         const handleClose = () => {
             onClose()
         }
 
+        console.log(existingFlairs)
+
         const flairOptions = existingFlairs.map((flair) => ({
             key: flair.id,
             value: flair.id,
             text: flair.name,
         }))
+
+        console.log(flairOptions)
+        
 
     return (
         <>
@@ -99,4 +112,4 @@ function EditPost({ post, open, onEdit, onClose }) {
     )
     }
 
-export default EditPost;
+export default EditPost

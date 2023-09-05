@@ -4,7 +4,7 @@ import { UserContext } from './context/UserContext';
 import EditPost from './EditPost';
 
 
-export default function PostCard({ image, caption, author, flair, post }) {
+export default function PostCard({ image, caption, author, flair, post, updatePosts }) {
 
     const [editModalOpen, setEditModalOpen] = useState(false)
     const { currentUser } = useContext(UserContext)
@@ -39,8 +39,13 @@ export default function PostCard({ image, caption, author, flair, post }) {
             <EditPost
               post={post}
               open={editModalOpen} 
-              onEdit={() => setEditModalOpen(false)}
+              onEdit={(updatedPost) => {
+                // Call the updatePosts callback to update the posts state
+                updatePosts(updatedPost);
+                setEditModalOpen(false);
+              }}
               onClose={() => setEditModalOpen(false)}
+              updatePosts={updatePosts}
             />
           </>
         )}
