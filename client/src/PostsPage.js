@@ -11,6 +11,7 @@ export default function PostsPage() {
     const updatePosts = (updatedPost) => {
         const updatedPosts = posts.map((p) => (p.id === updatedPost.id ? updatedPost : p))
         setPosts(updatedPosts)
+        console.log(updatedPosts)
     }
 
     return (
