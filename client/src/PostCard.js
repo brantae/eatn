@@ -26,8 +26,8 @@ export default function PostCard({ image, caption, author, flair, post, updatePo
     }
 
     const openCommentModal = () => {
-        setShowComments(true);
-      }
+        setShowComments(true)
+    }
 
     const handleDeleteConfirmed = () => {
         fetch(`/posts/${post.id}`, {
@@ -38,24 +38,20 @@ export default function PostCard({ image, caption, author, flair, post, updatePo
             })
             .then((response) => {
                 if (response.ok) {
-                  // Close the modal
-                setDeleteModalOpen(false);
-                // Filter out the deleted post from the posts state
-                const updatedPosts = posts.filter((p) => p.id !== post.id);
-                setPosts(updatedPosts);
-                console.log('Post deleted successfully.');
+                setDeleteModalOpen(false)
+                const updatedPosts = posts.filter((p) => p.id !== post.id)
+                setPosts(updatedPosts)
+                console.log('Post deleted successfully.')
             } else {
-                // Handle errors or display error messages
                 return response.json().then((errorData) => {
-                console.error('Error deleting post:', errorData);
-                // You can display error messages to the user here if needed
-                });
+                console.error('Error deleting post:', errorData)
+                })
             }
         })
                 .catch((error) => {
-                console.error('Error deleting post:', error);
-                });
-            };
+                console.error('Error deleting post:', error)
+                })
+            }
 
     return (
         <Card centered>
@@ -98,10 +94,11 @@ export default function PostCard({ image, caption, author, flair, post, updatePo
                     onClose={() => setDeleteModalOpen(false)}
                     onDelete={handleDeleteConfirmed}
         />
-        <button onClick={openCommentModal}>Show Comments</button>
-      {showComments && <CommentModal postId={post.id} onClose={() => setShowComments(false)} />}
+        
             </>
             )}
+            <Button size="small" onClick={openCommentModal}>Show Comments</Button>
+            {showComments && <CommentModal postId={post.id} onClose={() => setShowComments(false)} />}
         </Card.Content>
         </Card>
     )
