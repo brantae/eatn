@@ -3,6 +3,7 @@ import photo1 from './images/homepage1.jpg';
 import photo2 from './images/homepage2.jpg';
 import photo3 from './images/homepage3.jpg';
 import photo4 from './images/homepage4.jpg'; 
+import { Helmet } from 'react-helmet';
 
 function Home() {
     
@@ -10,6 +11,9 @@ function Home() {
     
     return (
 <div className="centered-container">
+<Helmet>
+            <title>home</title>
+        </Helmet>
         <div className="text-div">welcome to eatn, a photo-sharing app</div>
         <div className="image-grid">
         <Grid centered columns={2}>

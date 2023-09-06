@@ -1,12 +1,17 @@
 import React, { useContext } from 'react';
 import { Container, Header, Icon, Segment } from 'semantic-ui-react';
 import { UserContext } from './context/UserContext'
+import { Helmet } from 'react-helmet';
 
 function UserProfile() {
   const { currentUser } = useContext(UserContext);
 
   if (!currentUser) {
     return (
+      <div>
+      <Helmet>
+        <title>profile</title>
+      </Helmet>
       <Container text style={{ marginTop: '2em' }}>
         <Header as="h2" icon textAlign="center">
           <Icon name="user circle" circular />
@@ -16,10 +21,15 @@ function UserProfile() {
           <p>please log in to view your profile</p>
         </Segment>
       </Container>
+      </div>
     );
   }
 
   return (
+    <div>
+      <Helmet>
+        <title>profile</title>
+      </Helmet>
     <Container text style={{ marginTop: '2em' }}>
       <Header as="h2" icon textAlign="center">
         <Icon name="user circle" circular />
@@ -36,6 +46,7 @@ function UserProfile() {
         </Segment>
       </Segment.Group>
     </Container>
+    </div>
   );
 }
 

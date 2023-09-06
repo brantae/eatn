@@ -68,25 +68,25 @@ export default function CommentModal({ postId, onClose }) {
         )}
       </Modal.Content>
       <Modal.Actions>
-  <div>
-    <Input
-      fluid
-      placeholder="add a comment..."
-      value={newComment}
-      onChange={(e) => setNewComment(e.target.value)}
-      action={
-        <Button color="pink" onClick={handleSubmit}>
-          Send
-        </Button>
-      }
-    />
-  </div>
-  {error && (
-    <Message warning compact >
-      {error}
-    </Message>
-  )}
-</Modal.Actions>
-    </Modal>
-  )
+        <div>
+          <Input
+            fluid
+            placeholder="add a comment..."
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            action={
+              <Button color="pink" onClick={handleSubmit}>
+                Send
+              </Button>
+            }
+          />
+        </div>
+        {error && (
+          <Message warning compact >
+            {error}
+          </Message>
+        )}
+      </Modal.Actions>
+          </Modal>
+        )
 }

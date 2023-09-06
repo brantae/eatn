@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react'
 import PostCard from './PostCard'
 import { UserContext } from './context/UserContext'
 import { PostContext } from './context/PostContext'
+import { Helmet } from 'react-helmet'
 
 export default function PostsPage() {
     
@@ -16,6 +17,9 @@ export default function PostsPage() {
 
     return (
         <div>
+        <Helmet>
+            <title>feed</title>
+        </Helmet>
         {isLoggedIn ? (
             posts.map((post) => (
             <PostCard

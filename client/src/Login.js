@@ -3,6 +3,7 @@ import { Form, Button, Checkbox } from 'semantic-ui-react';
 import { Link } from 'react-router-dom'
 import { UserContext } from "./context/UserContext"
 import { useNavigate } from "react-router-dom"
+import { Helmet } from 'react-helmet';
 
     function Login() {
 
@@ -45,6 +46,9 @@ import { useNavigate } from "react-router-dom"
         return (
             
         <div className = 'login-form'> 
+                <Helmet>
+            <title>login</title>
+        </Helmet>
             <Form onSubmit={handleSubmit}>
                 <Form.Field>
                     <label>username</label>

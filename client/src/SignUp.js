@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useContext, useState } from "react"
 import { Form, Button, Checkbox } from 'semantic-ui-react'
 import { UserContext } from "./context/UserContext"
+import { Helmet } from 'react-helmet'
 
 
 function SignUp() {
@@ -56,6 +57,9 @@ function SignUp() {
 
     return (
 <div className = 'signup-form'>
+    <Helmet>
+        <title>sign up</title>
+    </Helmet>
         <Form onSubmit={handleSubmit}>
         <Form.Field className="input-field">
                 <label>full name</label>
