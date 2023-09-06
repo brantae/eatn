@@ -97,7 +97,7 @@ export default function PostCard({ image, caption, author, flair, post, updatePo
         
             </>
             )}
-            <Button size="small" onClick={openCommentModal}>Show Comments</Button>
+            <Button size="small" onClick={openCommentModal}>show comments</Button>
             {showComments && <CommentModal postId={post.id} onClose={() => setShowComments(false)} />}
         </Card.Content>
         </Card>

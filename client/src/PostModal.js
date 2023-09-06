@@ -95,7 +95,7 @@ export default function PostModal({isOpen, togglePostModal}) {
                             multiple={true}
                                     />
                         <Form.Input type="file" label="image" accept="image/*" name="image" onChange={handleImageChange} />
-                        <Button color='grey' type="submit">
+                        <Button color='pink' type="submit">
                             post
                         </Button>
                     </Form>
