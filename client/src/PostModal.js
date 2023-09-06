@@ -17,11 +17,12 @@ export default function PostModal({isOpen, togglePostModal}) {
     const handleClose = () => {
         togglePostModal()
         setErrors([])
+        setImageFile(null)
     }
 
     const handleImageChange = (event) => {
         const file = event.target.files[0]
-        setImageFile(file)
+        setImageFile(file || null)
     }
 
     const handleSelectFlair = (_, { value }) => {
@@ -35,11 +36,10 @@ export default function PostModal({isOpen, togglePostModal}) {
         
         const data = new FormData()
         data.append("post[caption]", e.target.caption.value)
-        if (!imageFile) {
-            setErrors(["Image cannot be blank"])
-            return
-        }
-        data.append("post[image]", imageFile)
+
+        if (imageFile !== null) {
+            data.append("post[image]", imageFile);
+            }
         selectedFlairs.forEach((flairId) => {
             data.append("post[flair_ids][]", flairId)
         })
@@ -59,6 +59,7 @@ export default function PostModal({isOpen, togglePostModal}) {
                 .then((data) => {
                 setPosts([...posts, data]);
                 togglePostModal();
+                setErrors([])
                 })
                 .catch((errors) => {
                 console.error('Validation errors:', errors);
