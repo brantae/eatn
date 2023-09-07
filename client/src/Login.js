@@ -35,7 +35,7 @@ import { Helmet } from 'react-helmet';
             if (resp.ok) {
                 resp.json().then((userData) => {
                     login(userData)})
-                navigate("/posts_page")
+                navigate("/feed")
             } else {
                 resp.json().then((errorData) => setErrors(errorData.errors))
             }

@@ -40,6 +40,7 @@ export default function PostModal({isOpen, togglePostModal}) {
         if (imageFile !== null) {
             data.append("post[image]", imageFile);
             }
+            
         selectedFlairs.forEach((flairId) => {
             data.append("post[flair_ids][]", flairId)
         })
@@ -60,6 +61,7 @@ export default function PostModal({isOpen, togglePostModal}) {
                 setPosts([...posts, data]);
                 togglePostModal();
                 setErrors([])
+                setImageFile(null)
                 })
                 .catch((errors) => {
                 console.error('Validation errors:', errors);

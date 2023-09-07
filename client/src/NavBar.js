@@ -58,8 +58,8 @@ export default function NavBar() {
                 />
                 <Menu.Item
                 name="feed"
-                active={pathname === '/posts_page'}
-                onClick={() => navigate('/posts_page')}
+                active={pathname === '/feed'}
+                onClick={() => navigate('/feed')}
                 />
                 <Menu.Item
                 name="profile"

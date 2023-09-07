@@ -21,7 +21,7 @@ return (
           <Route exact path="/" element={<Home/>} />
           <Route exact path="/login" element = {<Login />} />
           <Route exact path="/sign_up" element = {<SignUp />}/>
-          <Route exact path="/posts_page" element = {<PostsPage />}/>
+          <Route exact path="/feed" element = {<PostsPage />}/>
           <Route exact path="/profile" element = {<UserProfile />}/>
         </Routes>
         </FlairProvider>
