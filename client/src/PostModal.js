@@ -37,9 +37,12 @@ export default function PostModal({isOpen, togglePostModal}) {
         const data = new FormData()
         data.append("post[caption]", e.target.caption.value)
 
-        if (imageFile !== null) {
+        if (imageFile === null) {
+            setErrors(["Image cannot be blank"]);
+            return;
+          } else {
             data.append("post[image]", imageFile);
-            }
+          }
             
         selectedFlairs.forEach((flairId) => {
             data.append("post[flair_ids][]", flairId)

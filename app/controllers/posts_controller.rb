@@ -15,17 +15,12 @@ class PostsController < ApplicationController
     end
 
     def create
-        if create_post_params[:image].nil?
-            render json: { errors: ['Image cannot be blank'] }, status: :unprocessable_entity
-            return
-          end
-        
-          post = Post.create(create_post_params)
-          if post.persisted?
-            render json: post, status: :ok
-          else
-            render json: { errors: post.errors.full_messages }, status: :unprocessable_entity
-          end
+        post = Post.create(create_post_params)
+        if post.persisted?
+          render json: post, status: :ok
+        else
+          render json: { errors: post.errors.full_messages }, status: :unprocessable_entity
+        end
       end
 
     def update
