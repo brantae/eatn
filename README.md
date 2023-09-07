@@ -2,7 +2,7 @@
 
 This is eatn! Similar to an instagram clone, eatn is a photo sharing app where users can post their "phone eats first" moments. Add flair to give your post some extra spice!
 
-![eatn screenshot](client/public/eatn screenshot.png?raw=true)
+![eatn screenshot](client/public/eatn_screenshot.png?raw=true)
 
 ## Table of Contents
 
@@ -22,27 +22,20 @@ This is eatn! Similar to an instagram clone, eatn is a photo sharing app where u
 ## Installation
 
 1. Clone this repository to your local machine:
-
    ```sh
    $ git clone https://github.com/brantae/eatn.git
-
 2. Enter the directory and open in VSCode
-
    ```sh
     $ cd eatn
     $ code .
-
 3. Install dependencies
-
    ```sh
    $ bundle install
    $ npm install
-
-4. Start database. Open Ubuntu and type the first line to start it. Check status with the next.
-  ```sh
-  $ sudo systemctl start postgresql
-  $ sudo systemctl status postgresql
-
+4. Start database. Open Ubuntu and type the first line to start it.        Check status with the next.
+    ```sh
+      $ sudo systemctl start postgresql
+      $ sudo systemctl status postgresql
 5. Start client and server
     ```sh
     $ rails server
